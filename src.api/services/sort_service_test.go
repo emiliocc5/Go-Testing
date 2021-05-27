@@ -9,38 +9,40 @@ import (
 
 func TestSort(t *testing.T) {
 	//Init
-	elements := []int{9, 8, 6, 4, 27, 83}
+	elements := sort.GetElements(10)
 
 	//Execution
 	Sort(elements)
 
 	//Validation
-	assert.Equal(t, elements[0], 4)
-	assert.Equal(t, elements[len(elements) - 1], 83)
+	assert.Equal(t, elements[0], 0)
+	assert.Equal(t, elements[len(elements) - 1], 9)
 }
 
-func TestBubbleSort(t *testing.T) {
+func TestSortWithMoreThan10000(t *testing.T) {
 	//Init
-	elements := []int{9, 8, 6, 4, 27, 83}
+	elements := sort.GetElements(10001)
 
 	//Execution
-	BubbleSort(elements)
+	Sort(elements)
 
 	//Validation
-	assert.Equal(t, elements[0], 4)
-	assert.Equal(t, elements[len(elements) - 1], 83)
+	assert.Equal(t, elements[0], 0)
+	assert.Equal(t, elements[len(elements) - 1], 10000)
 }
 
-func BenchmarkBubbleSort(b *testing.B) {
-	elements := []int{9, 8, 6, 4, 27, 83}
+func BenchmarkSort10K(b *testing.B) {
+	elements := sort.GetElements(100000)
 	for i := 0; i < b.N; i++ {
-		sort.BubbleSort(elements)
+		Sort(elements)
 	}
 }
 
-func BenchmarkSort(b *testing.B) {
-	elements := []int{9, 8, 6, 4, 27, 83}
+func BenchmarkSort100K(b *testing.B) {
+	elements := sort.GetElements(1000000)
 	for i := 0; i < b.N; i++ {
-		sort.Sort(elements)
+		Sort(elements)
 	}
 }
+
+
